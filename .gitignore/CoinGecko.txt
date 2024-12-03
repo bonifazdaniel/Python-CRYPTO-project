@@ -1,6 +1,0 @@
-CoinGecko
-
-API que se utiliza para monitorear los precios del bitcoin
-
-Gmail
-g9gerRi!wJqE5_c
