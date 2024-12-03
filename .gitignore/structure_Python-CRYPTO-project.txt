@@ -1,0 +1,33 @@
+Python-CRYPTO-project/
+│
+├── src/                 # Carpeta para todos los scripts de Python
+│   ├── bitcoin_data.py
+│   ├── import_pandas_as_excel.py
+│   ├── cargar_excel.py
+│   ├── graph_prices.py
+│   ├── med_mediana.py
+│   ├── volatilidad_py
+│   ├── analisis_correlación.py
+│   ├── anima_py.py
+│   └── prueba.py
+│
+├── data/                # Carpeta para archivos de datos como Excel y logs
+│   ├── arima_statsmodels.xlsx
+│   ├── bitcoin_prices.xlsx
+│   ├── correlaciones_crypto.xlsx
+│   ├── media_mediana.xlsx
+│   ├── volatilidad.xlsx
+│   └── script_log.log
+│
+├── results/             # Carpeta para almacenar los resultados como gráficos e imágenes
+│   ├── arima_diagnostics.png
+│   ├── btc_predictions.png
+│   ├── btc_prices_plot.png
+│   └── Figure_1.png
+│
+├── docs/                # Documentación del proyecto, hallazgos y licencia
+│   ├── Hallazgos.txt
+│   ├── LICENSE.txt       # Nombre corregido para seguir convención
+│   └── README.txt
+│
+└── .gitignore           # Para excluir archivos que no deseas subir a GitHub
