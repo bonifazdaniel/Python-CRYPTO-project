@@ -4,8 +4,8 @@
 
 import pandas as pd
 
-# Cargar los datos desde la carpeta especificada
-df = pd.read_excel('C:\\Users\\bonif\\OneDrive\\Documentos\\Python CRYPTO project\\data\\bitcoin_prices.xlsx')
+# Cargar los datos desde la carpeta relativa 'data'
+df = pd.read_excel('data/bitcoin_prices.xlsx')
 df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
 
 # Calcular los retornos diarios
@@ -20,10 +20,8 @@ volatility_df = pd.DataFrame({
     'Valor': [volatility]
 })
 
-# Guardar el DataFrame en un archivo Excel en la carpeta de datos
-volatility_df.to_excel('C:\\Users\\bonif\\OneDrive\\Documentos\\Python CRYPTO project\\data\\volatilidad.xlsx', index=False)
+# Guardar el DataFrame en un archivo Excel en la carpeta relativa 'data'
+volatility_df.to_excel('data/volatilidad.xlsx', index=False)
 
-print("Archivo 'volatilidad.xlsx' creado con éxito en la carpeta 'data'. Contiene la siguiente estadística:")
+print("Archivo 'volatilidad.xlsx' creado con éxito en la carpeta 'data'.")
 print(volatility_df)
-
-input("Presione Enter para cerrar")

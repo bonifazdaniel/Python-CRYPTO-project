@@ -4,77 +4,71 @@
 # incluye manejo de errores que capturará y mostrará problemas sin cerrar la ventana del script inmediatamente
 # incluye un DataFrame que recopila las predicciones junto con sus intervalos de confianza y las guarda en un archivo Excel llamado arima_statsmodels.xlsx
 
-import os
 import pandas as pd
 import matplotlib.pyplot as plt
 from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.tsa.stattools import adfuller
 import logging
 
-# Configurar la ruta de logs y gráficos
-log_path = 'C:\\Users\\bonif\\OneDrive\\Documentos\\Python CRYPTO project\\data\\script_log.log'
-logging.basicConfig(filename=log_path, level=logging.DEBUG, format='%(asctime)s %(levelname)s:%(message)s')
+# Configurar logs para registrar errores
+logging.basicConfig(filename='data/script_log.log', level=logging.DEBUG, format='%(asctime)s %(levelname)s:%(message)s')
 
 try:
-    # Configurar el directorio de trabajo
-    os.chdir('C:\\Users\\bonif\\OneDrive\\Documentos\\Python CRYPTO project')
-
-    # Mostrar el directorio de trabajo actual para verificar la ruta
-    print("Directorio de trabajo actual:", os.getcwd())
-
-    # Cargar el DataFrame desde la carpeta de datos
-    file_path = 'data\\bitcoin_prices.xlsx'
-    combined_df = pd.read_excel(file_path)
+    # Cargar el archivo desde la carpeta relativa 'data'
+    combined_df = pd.read_excel('data/bitcoin_prices.xlsx')
+    logging.info('Archivo cargado correctamente.')
+    
+    # Verificar los primeros datos
     print(combined_df.head())
-    print(combined_df.dtypes)
-    logging.info('DataFrame cargado correctamente.')
-
-    # Usar la columna correcta 'price'
     btc_prices = combined_df['price']
-    btc_prices.plot(title='Bitcoin Prices Over Time')
-    plt.savefig('results\\btc_prices_plot.png')
-    logging.info('Gráfico de precios guardado.')
 
+    # Verificar estacionariedad
     def check_stationarity(data):
         result = adfuller(data.dropna())
-        print('ADF Statistic: %f' % result[0])
-        print('p-value: %f' % result[1])
+        print('ADF Statistic:', result[0])
+        print('p-value:', result[1])
         if result[1] > 0.05:
-            print("Series is not stationary")
+            print("La serie no es estacionaria")
         else:
-            print("Series is stationary")
+            print("La serie es estacionaria")
 
     check_stationarity(btc_prices)
     logging.info('Chequeo de estacionariedad completado.')
 
-    model = ARIMA(btc_prices, order=(1,1,1))
+    # Ajustar modelo ARIMA
+    model = ARIMA(btc_prices, order=(1, 1, 1))
     fitted_model = model.fit()
-    fitted_model.plot_diagnostics(figsize=(15, 12))
-    plt.savefig('results\\arima_diagnostics.png')
+    logging.info('Modelo ARIMA ajustado con éxito.')
+
+    # Diagnóstico del modelo
+    fitted_model.plot_diagnostics(figsize=(10, 8))
+    plt.savefig('results/arima_diagnostics.png')
     logging.info('Diagnósticos del modelo ARIMA guardados.')
 
-    preds = fitted_model.get_forecast(steps=30)
-    preds_ci = preds.conf_int()
+    # Predicciones
+    forecast = fitted_model.get_forecast(steps=30)
+    forecast_ci = forecast.conf_int()
 
-    ax = btc_prices.plot(label='Observado', figsize=(14, 7))
-    preds.predicted_mean.plot(ax=ax, label='Predicciones Futuras')
-    ax.fill_between(preds_ci.index, preds_ci.iloc[:, 0], preds_ci.iloc[:, 1], color='k', alpha=.25)
+    # Gráfico de predicciones
+    ax = btc_prices.plot(label='Observado', figsize=(10, 6))
+    forecast.predicted_mean.plot(ax=ax, label='Predicción')
+    ax.fill_between(forecast_ci.index, forecast_ci.iloc[:, 0], forecast_ci.iloc[:, 1], color='gray', alpha=0.3)
     ax.set_xlabel('Fecha')
     ax.set_ylabel('Precio')
     plt.legend()
-    plt.savefig('results\\btc_predictions.png')
+    plt.savefig('results/btc_predictions.png')
     logging.info('Gráfico de predicciones guardado.')
 
+    # Guardar predicciones en Excel
     results_df = pd.DataFrame({
-        'Fecha': preds_ci.index,
-        'Predicción Media': preds.predicted_mean,
-        'Intervalo de Confianza Bajo': preds_ci.iloc[:, 0],
-        'Intervalo de Confianza Alto': preds_ci.iloc[:, 1]
+        'Fecha': forecast_ci.index,
+        'Predicción Media': forecast.predicted_mean,
+        'Intervalo Bajo': forecast_ci.iloc[:, 0],
+        'Intervalo Alto': forecast_ci.iloc[:, 1]
     })
-    results_df.to_excel('data\\arima_statsmodels.xlsx', index=False)
-    print("Archivo 'arima_statsmodels.xlsx' creado con éxito en la carpeta 'data'.")
-    logging.info("Archivo Excel creado con éxito en la carpeta 'data'.")
+    results_df.to_excel('data/arima_statsmodels.xlsx', index=False)
+    logging.info('Archivo Excel de predicciones creado con éxito.')
 
 except Exception as e:
-    print("Ocurrió un error durante la ejecución del script:", e)
-    logging.error("Error: {}".format(e))
+    logging.error("Error durante la ejecución del script: {}".format(e))
+    print("Ocurrió un error: ", e)

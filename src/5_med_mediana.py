@@ -1,7 +1,7 @@
 import pandas as pd
 
-# Cargar los datos desde la ruta específica en la carpeta de datos
-df = pd.read_excel('C:\\Users\\bonif\\OneDrive\\Documentos\\Python CRYPTO project\\data\\bitcoin_prices.xlsx')
+# Cargar los datos desde la carpeta relativa 'data'
+df = pd.read_excel('data/bitcoin_prices.xlsx')
 df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
 
 # Calcular estadísticas descriptivas
@@ -16,10 +16,8 @@ stats_df = pd.DataFrame({
     'Valor': [mean_price, median_price, std_deviation, quantiles[0.25], quantiles[0.50], quantiles[0.75]]
 })
 
-# Guardar el DataFrame en un archivo Excel en la carpeta de datos
-stats_df.to_excel('C:\\Users\\bonif\\OneDrive\\Documentos\\Python CRYPTO project\\data\\media_mediana.xlsx', index=False)
+# Guardar el DataFrame en un archivo Excel en la carpeta relativa 'data'
+stats_df.to_excel('data/media_mediana.xlsx', index=False)
 
-print("Archivo 'media_mediana.xlsx' creado con éxito en la carpeta 'data'. Contiene las siguientes estadísticas:")
+print("Archivo 'media_mediana.xlsx' creado con éxito en la carpeta 'data'.")
 print(stats_df)
-
-input("Presione Enter para continuar...")

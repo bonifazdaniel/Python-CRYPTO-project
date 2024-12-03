@@ -13,8 +13,7 @@ df = pd.DataFrame(bitcoin_data['prices'], columns=['timestamp', 'price'])
 # Convertir el timestamp a formato datetime
 df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
 
-# Guardar el DataFrame en un archivo Excel en la carpeta de datos
-df.to_excel('C:\\Users\\bonif\\OneDrive\\Documentos\\Python CRYPTO project\\data\\bitcoin_prices.xlsx', engine='openpyxl', index=False)
+# Guardar el DataFrame en un archivo Excel en la carpeta relativa 'data'
+df.to_excel('data/bitcoin_prices.xlsx', engine='openpyxl', index=False)
 
-print("Archivo guardado correctamente en la carpeta data.")
-
+print("Archivo guardado correctamente en la carpeta 'data'.")

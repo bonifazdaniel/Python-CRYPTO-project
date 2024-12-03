@@ -1,10 +1,13 @@
-import matplotlib.pyplot as plt
 import pandas as pd
+import matplotlib.pyplot as plt
 
-# Cargar los datos desde la carpeta de datos especificada
-df = pd.read_excel('C:\\Users\\bonif\\OneDrive\\Documentos\\Python CRYPTO project\\data\\bitcoin_prices.xlsx')
+# Cargar los datos desde la carpeta relativa 'data'
+df = pd.read_excel('data/bitcoin_prices.xlsx')
+
+# Asegúrate de que la columna de fechas está en formato datetime
 df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
 
+# Crear y mostrar el gráfico
 plt.figure(figsize=(10, 5))
 plt.plot(df['timestamp'], df['price'], label='Precio de Bitcoin')
 plt.title('Precio de Bitcoin a lo largo del tiempo')
