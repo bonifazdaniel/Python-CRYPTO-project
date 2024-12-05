@@ -1,0 +1,43 @@
+(ESPAÑOL)
+---------------
+
+Documento de Hallazgos:
+
+Este documento resume los principales hallazgos derivados de los análisis realizados sobre los datos de Bitcoin. Los scripts analizados abordan diferentes aspectos de los datos financieros de Bitcoin, proporcionando una visión integral de su comportamiento en el mercado.
+
+1. **Estadísticas Descriptivas**:
+   - **Media y Mediana**: Ofrecen una visión de la tendencia central de los precios de Bitcoin.
+   - **Desviación Estándar y Cuartiles**: Muestran la variabilidad y distribución de los precios.
+
+2. **Volatilidad**:
+   - La volatilidad calculada demuestra la variabilidad en los precios del Bitcoin, lo que es crucial para entender el riesgo en inversiones.
+
+3. **Correlaciones**:
+   - Las correlaciones entre Bitcoin y Ethereum revelan cómo se mueven juntas estas dos principales criptomonedas, lo cual es vital para estrategias de inversión diversificada.
+
+4. **Predicciones del Modelo ARIMA**:
+   - Las predicciones realizadas con el modelo ARIMA ayudan a anticipar futuros precios de Bitcoin, facilitando la toma de decisiones para inversionistas y analistas.
+
+Cada hallazgo está soportado por datos concretos y análisis estadísticos, proporcionando una base sólida para decisiones de inversión en criptomonedas.
+
+(ENGLISH)
+----------------
+
+Findings Document:
+
+This document summarizes the main findings derived from the analyses conducted on Bitcoin data. The scripts analyzed address different aspects of Bitcoin's financial data, providing a comprehensive view of its market behavior.
+
+Descriptive Statistics:
+
+Mean and Median: Offer insight into the central trend of Bitcoin prices.
+Standard Deviation and Quartiles: Show the variability and distribution of prices.
+Volatility:
+
+The calculated volatility demonstrates the variability in Bitcoin prices, which is crucial for understanding investment risk.
+Correlations:
+
+The correlations between Bitcoin and Ethereum reveal how these two major cryptocurrencies move together, which is vital for diversified investment strategies.
+ARIMA Model Predictions:
+
+Predictions made with the ARIMA model help anticipate future Bitcoin prices, facilitating decision-making for investors and analysts.
+Each finding is supported by concrete data and statistical analysis, providing a solid foundation for cryptocurrency investment decisions.
